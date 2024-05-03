@@ -204,7 +204,8 @@ def trainModel(model, train_dataloader):
 
          # Print log info
          if i % 10 == 0: 
-            logging.info('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, MAE: {:.4f}, WAPE: {}'.format(epoch + 1, config.NUM_EPOCHS, i, total_step, loss.item(), criterionL1(outputs, trend).detach().cpu(), avg_batch_wape.item()))
+            # logging.info('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, MAE: {:.4f}, WAPE: {}'.format(epoch + 1, config.NUM_EPOCHS, i, total_step, loss.item(), criterionL1(outputs, trend).detach().cpu(), avg_batch_wape.item()))
+            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, MAE: {:.4f}, WAPE: {}'.format(epoch + 1, config.NUM_EPOCHS, i, total_step, loss.item(), criterionL1(outputs, trend).detach().cpu(), avg_batch_wape.item()))
       epoch_mae = evaluate(model, test_dataloader)
 
       if epoch_mae < best_mae:
@@ -273,8 +274,11 @@ def evaluate(model, test_dataloader, show_plots=False):
       trend = torch.cat(gts, dim=0)
       mae_mean = criterionL1(outputs.unsqueeze(0), trend).detach().cpu()
       wMAPE = 100 * torch.sum(torch.sum(torch.abs(trend - outputs), dim=-1)) / torch.sum(torch.vstack(gts))
-      logging.info("mae_mean: {}".format(mae_mean))
-      logging.info("wMAPE_mean: {}".format(wMAPE))
+      # logging.info("mae_mean: {}".format(mae_mean))
+      # logging.info("wMAPE_mean: {}".format(wMAPE))
+      print("mae_mean: {}".format(mae_mean))
+      print("wMAPE_mean: {}".format(wMAPE))
+
 
    
    weeks = [12,8,6,4]
@@ -292,8 +296,8 @@ def evaluate(model, test_dataloader, show_plots=False):
 model = trainModel(model, train_dataloader)
 
 
-logging.info("Saved log " + train_dir_name)
-logging.info("Evaluating")
+print("Saved log " + train_dir_name)
+print("Evaluating")
 best_model_file = find_model_file(train_dir_name)
 model.load_state_dict(torch.load(best_model_file, map_location=lambda storage, loc: storage.cuda(0)))
 model.eval()
