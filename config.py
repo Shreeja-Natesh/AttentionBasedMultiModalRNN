@@ -1,6 +1,7 @@
 import torch
 
-DEVICE = torch.device('cuda:0')
+# DEVICE = torch.device('cuda:0')
+DEVICE = torch.device("cpu")
 DATASET_PATH = "dataset/images"
 TRAIN_DATASET = "dataset/train.csv"
 TEST_DATASET = "dataset/test.csv"
