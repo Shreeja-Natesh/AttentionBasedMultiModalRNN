@@ -71,7 +71,7 @@ logging.basicConfig(
 
 
 dataset_path = config.DATASET_PATH
-
+print(dataset_path)
 
 normalize = transforms.Normalize(
 mean=[0.485, 0.456, 0.406],
@@ -144,6 +144,7 @@ def show_attn_map(img, alpha_list):
    plt.show()
 
 def trainModel(model, train_dataloader):
+   print("Training model")
    # Loss and optimizer
    criterion = nn.MSELoss()
    criterionL1 = nn.L1Loss()
