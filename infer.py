@@ -38,7 +38,7 @@ def print_error_metrics(y_test, y_hat, rescaled_y_test, rescaled_y_hat):
     print(mae, wape, rescaled_mae, rescaled_wape)
 
 dateTimeObj = datetime.now()
-timestamp = dateTimeObj.strftime("%d-%m-%Y-%H-%M")
+timestamp = dateTimeObj.strftime("%d-%m-%Y")
 
 normalization_values = np.load(config.NORMALIZATION_VALUES_PATH)
 
