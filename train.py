@@ -223,7 +223,7 @@ def trainModel(model, train_dataloader):
 
 
 def evaluate(model, test_dataloader, show_plots=False):
-   print("Evaluating...")
+   print("Evaluating model...")
    criterionL1 = nn.L1Loss()
 
    mae_mean = []
@@ -295,8 +295,8 @@ def evaluate(model, test_dataloader, show_plots=False):
 model = trainModel(model, train_dataloader)
 
 
-print("Saved log " + train_dir_name)
-print("Evaluating")
+# print("Saved log " + train_dir_name)
+print("Evaluating best model...")
 best_model_file = find_model_file(train_dir_name)
 model.load_state_dict(torch.load(best_model_file, map_location=lambda storage, loc: storage.cuda(0)))
 model.eval()
