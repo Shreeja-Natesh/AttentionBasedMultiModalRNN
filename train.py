@@ -23,7 +23,7 @@ from datetime import datetime
 device = torch.device(config.DEVICE)
 
 dateTimeObj = datetime.now()
-timestamp = dateTimeObj.strftime("%d-%m-%Y-%H-%M")
+timestamp = dateTimeObj.strftime("%d-%m-%Y")
 
 normalization_values = np.load(config.NORMALIZATION_VALUES_PATH)
 
@@ -287,7 +287,7 @@ def evaluate(model, test_dataloader, show_plots=False):
      trend_np = np.array([tr[0:w] for tr in trend.numpy()])
      codes = [sub[5:-4] for sub in codes_list]
      file = {"results": outputs_np,"gts": trend_np, "codes": codes}
-     torch.save(file, model_filename+str(w)+"_dict.pth")
+     torch.save(file, model_filename+"_"+str(w)+"_dict.pth")
 
      
    return mae_mean
