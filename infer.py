@@ -77,13 +77,13 @@ else:
 
 
 # Logger
-logging.basicConfig(
-   level=logging.INFO,
-   format='%(asctime)s - %(levelname)s - %(message)s',
-   handlers=[
-      logging.FileHandler(model_filename[:-4]+'.log'),
-      logging.StreamHandler()
-    ])
+#logging.basicConfig(
+#   level=logging.INFO,
+#   format='%(asctime)s - %(levelname)s - %(message)s',
+#   handlers=[
+#      logging.FileHandler(model_filename[:-4]+'.log'),
+#      logging.StreamHandler()
+#    ])
 
 
 dataset_path = config.DATASET_PATH
@@ -234,8 +234,8 @@ def evaluate(model, test_dataloader, show_plots=False):
 
       mae_mean = criterionL1(outputs.unsqueeze(0), trend).detach().cpu()
       wMAPE = 100 * torch.sum(torch.sum(torch.abs(trend - outputs), dim=-1)) / torch.sum(torch.vstack(gts))
-      logging.info("mae_mean: {}".format(mae_mean))
-      logging.info("wMAPE_mean: {}".format(wMAPE))
+      print("mae_mean: {}".format(mae_mean))
+      print("wMAPE_mean: {}".format(wMAPE))
 
    
    weeks = [12,8,6,4]
@@ -251,8 +251,8 @@ def evaluate(model, test_dataloader, show_plots=False):
    return mae_mean
 
 
-train_dir_name = os.path.join('AttentionBasedMultiModalRNN','models',model_filename)
-logging.info("Evaluating")
+# train_dir_name = os.path.join('AttentionBasedMultiModalRNN','models',model_filename)
+print("Evaluating")
 best_model_file = find_model_file(train_dir_name)
 model.load_state_dict(torch.load(best_model_file, map_location=lambda storage, loc: storage.cuda(0)))
 model.eval()
